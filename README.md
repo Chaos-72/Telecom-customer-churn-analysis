@@ -1,210 +1,168 @@
+
 # Telecom Customer Churn Analysis & Prediction
 
 <img src="https://github.com/Chaos-72/Telecom-customer-churn-analysis/blob/main/image.png" alt="Dashboard Image">
 
+---
 
-## Project Overview
+## Project Story
 
-Customer churn is one of the most critical challenges for subscription-based businesses such as telecom companies. Understanding **why customers leave** and identifying **who is likely to leave in the future** helps companies design better retention strategies.
+Customer churn is one of the biggest challenges for subscription-based businesses like telecom companies. Losing customers directly impacts revenue, and companies often struggle to understand **why customers leave and which customers are at risk of leaving next**.
 
-This project performs an **end-to-end customer churn analysis** using:
+In this project, I performed an **end-to-end customer churn analysis** to identify the factors influencing customer churn and built a **machine learning model to predict future churners**.
 
-* **SQL Server** for data extraction, transformation, and cleaning
-* **Power BI** for data visualization and dashboard creation
-* **Python (Jupyter Notebook)** for machine learning churn prediction
-
-The goal of the project is to:
-
-* Analyze historical customer data to identify **key churn drivers**
-* Build **interactive dashboards** to explore churn patterns
-* Train a **machine learning model** to predict future churners
-* Help businesses take **data-driven retention actions**
+The goal was to combine **data analysis, business intelligence, and machine learning** to help telecom companies make **data-driven retention decisions**.
 
 ---
 
-# Tech Stack
+## My Approach
 
-| Tool                          | Purpose                                           |
-| ----------------------------- | ------------------------------------------------- |
-| **SQL Server (SSMS)**         | Data cleaning, transformation, and creating views |
-| **Power BI**                  | Data visualization and dashboard creation         |
-| **Python (Jupyter Notebook)** | Machine learning modeling and prediction          |
-| **Pandas & Scikit-learn**     | Data preprocessing and model training             |
-| **Excel / CSV**               | Data export and exchange between tools            |
+To solve this problem, I designed a workflow that covers the complete analytics pipeline:
+
+1. **Prepare and clean raw telecom data using SQL**
+2. **Analyze churn patterns and visualize insights using Power BI**
+3. **Build a machine learning model in Python to predict churn**
+4. **Create dashboards to identify high-risk customers**
+
+This allowed me to transform raw customer data into **actionable business insights and predictive intelligence**.
 
 ---
 
-# Project Workflow
+## Data Preparation (SQL Server)
 
-## 1. Data ETL & Cleaning (SQL Server)
+The first step was preparing the dataset for analysis.
 
-The project begins with importing raw telecom customer data into **SQL Server**.
+I imported the raw telecom customer dataset into **SQL Server** and performed several cleaning and transformation steps to ensure the data was reliable for analysis.
 
-Key steps performed:
+Key actions included:
 
-* Created a **new database** to store the telecom dataset
-* Imported raw customer data into SQL tables
-* Cleaned missing values
-* Standardized categorical values
-* Created calculated columns
+* Handling missing values and replacing NULL entries with meaningful values
+* Standardizing categorical fields
+* Converting the churn column from **Yes/No into a binary format (1/0)** for easier analysis
+* Creating additional analytical columns such as **Age Group** and **Churn Status**
 
-### Data Cleaning Tasks
-
-* Replaced **NULL values** with appropriate values such as:
-
-  * `None`
-  * `Other`
-* Converted churn column:
-
-  * `Yes → 1`
-  * `No → 0`
-* Created new analytical columns:
-
-  * **Churn Status**
-  * **Age Group**
-
-### SQL Views Created
-
-Two views were created to simplify analysis:
+To make the analysis easier, I also created SQL views such as:
 
 * **Churned Customers View**
 * **New Joiners View**
 
-These views were later used directly in **Power BI dashboards**.
+These views helped simplify reporting and were directly used in the Power BI dashboards.
 
 ---
 
-# 2. Data Visualization (Power BI)
+## Churn Analysis & Dashboard (Power BI)
 
-Power BI was connected directly to the **SQL Server database** to import the cleaned data and views.
+After cleaning the dataset, I connected **Power BI directly to the SQL Server database** and built an interactive dashboard to analyze customer churn patterns.
 
-## KPI Metrics (DAX)
+The dashboard allows exploration of churn across multiple dimensions, including:
 
-Several measures were created using **DAX**:
+### Customer Demographics
+
+* Gender distribution
+* Age group analysis
+
+### Account Characteristics
+
+* Contract type
+* Payment methods
+* Customer tenure
+
+### Geographic Patterns
+
+* State-wise churn distribution
+
+### Service Usage
+
+* Internet service type
+* Security services
+* Additional telecom features
+
+To monitor overall churn performance, I created several **DAX measures** such as:
 
 * Total Customers
 * Total Churn
 * Churn Rate
 * New Joiners
 
-These KPIs help monitor customer retention performance.
+The dashboard also includes interactive filters and tooltips that allow users to drill down into specific churn segments.
 
 ---
 
-## Dashboard Analysis
+## Key Insights from the Analysis
 
-The Power BI dashboard analyzes churn across multiple dimensions:
+The analysis revealed several important patterns behind customer churn.
 
-### Demographic Analysis
+Some of the most notable insights include:
 
-* Gender
-* Age Groups
+* Customers with **month-to-month contracts churn significantly more often** than customers with long-term contracts.
+* **Fiber internet users show higher churn rates** compared to DSL users.
+* Customers who do not subscribe to **security services** are more likely to leave.
+* Certain geographic regions show **higher churn concentration**, indicating potential service or pricing issues.
 
-### Account Analysis
-
-* Contract Type
-* Payment Method
-* Tenure
-
-### Geographic Analysis
-
-* State wise churn distribution
-
-### Service Usage Analysis
-
-* Internet type
-* Security services
-* Additional telecom services
-
-### Interactivity Features
-
-The dashboard includes:
-
-* **Dropdown filters** for dynamic exploration
-* **Tooltips** showing churn reasons
-* Interactive visuals for drill-down analysis
+These insights highlight areas where telecom companies can focus their **customer retention strategies**.
 
 ---
 
-# 3. Machine Learning Prediction (Python)
+## Predicting Customer Churn (Machine Learning)
 
-A **machine learning model** was developed to predict which customers are likely to churn.
+Beyond analyzing past churn behavior, I wanted to predict **which customers are most likely to churn in the future**.
 
-## Data Preparation
+Using **Python in Jupyter Notebook**, I built a machine learning model to perform churn prediction.
 
-Steps performed in Jupyter Notebook:
+The workflow included:
 
-* Imported cleaned dataset
-* Removed non-relevant columns such as:
+* Data preprocessing using **Pandas**
+* Encoding categorical variables
+* Removing non-informative fields such as **CustomerID**
+* Splitting the dataset into training and testing sets
 
-  * `CustomerID`
-* Converted categorical variables to numerical format using encoding
-* Split the data into **training and testing datasets**
-
----
-
-## Model Training
-
-A **Random Forest Classifier** was used to train the churn prediction model.
-
-Why Random Forest?
-
-* Handles complex feature interactions
-* Works well with tabular datasets
-* Reduces overfitting compared to single decision trees
+I then trained a **Random Forest Classifier**, which works well with structured datasets and can capture complex relationships between features.
 
 ---
 
-## Model Evaluation
+## Model Performance
 
-Model performance was evaluated using:
+The model was evaluated using a **confusion matrix and classification report**.
 
-* **Confusion Matrix**
-* **Classification Report**
+The Random Forest model achieved an accuracy of approximately **84%**, indicating strong performance in identifying customers who are likely to churn.
 
-### Model Accuracy
+The trained model was then used to generate predictions for a new dataset.
 
-**~84% accuracy**
-
-This indicates the model performs well in predicting potential churners.
+The predicted churn results were exported into a **CSV file**, which was later integrated back into Power BI for visualization.
 
 ---
 
-## Prediction Output
+## Churn Prediction Dashboard
 
-The trained model was then used to:
+To make the predictions useful for decision-makers, I created an additional **Power BI dashboard focused on predicted churners**.
 
-* Predict churn probability on a new dataset
-* Export predictions to a **CSV file**
+This dashboard highlights:
 
-This file was later used inside **Power BI** for visualization.
+* Customers who are most likely to churn
+* Potential revenue at risk
+* Demographic characteristics of high-risk customers
+* Service usage patterns among predicted churners
 
----
-
-# 4. Predicted Churn Dashboard (Power BI)
-
-The predicted dataset was imported into Power BI to create a **Churn Prediction Profile Page**.
-
-This page helps identify **high-risk customers**.
-
-### Insights Provided
-
-* List of predicted churners
-* Revenue impact from potential churn
-* Customer demographic profile
-* Customer service usage patterns
-
-### Business Value
-
-This enables companies to:
-
-* Run **targeted retention campaigns**
-* Offer **personalized incentives**
-* Reduce revenue loss from churn
+This enables businesses to quickly identify **high-risk customer segments**.
 
 ---
 
-# Project Structure
+## Business Impact
+
+This project demonstrates how combining **data analysis and machine learning** can help telecom companies move from reactive to proactive decision-making.
+
+With this system, companies can:
+
+* Identify customers at risk of leaving
+* Run targeted retention campaigns
+* Offer personalized incentives
+* Reduce revenue loss caused by churn
+
+Instead of reacting after customers leave, companies can **predict churn and act early**.
+
+---
+
+## Project Structure
 
 ```
 Customer-Churn-Analysis
@@ -214,7 +172,7 @@ Customer-Churn-Analysis
 │   ├── cleaned_dataset.xlsx
 │
 ├── SQL
-│   ├── Create_and_distibur .sql
+│   ├── Create_and_distibur.sql
 │   ├── churn_views.sql
 │
 ├── powerbi
@@ -231,69 +189,32 @@ Customer-Churn-Analysis
 
 ---
 
-# Key Insights from Analysis
+## Tools & Technologies
 
-Some typical churn insights discovered:
-
-* Customers with **month-to-month contracts** churn more frequently
-* **Fiber internet users** show higher churn compared to DSL
-* Customers without **security services** have higher churn probability
-* Certain **states/regions** show significantly higher churn rates
-
-These insights can guide **customer retention strategies**.
+* **SQL Server (SSMS)** – Data cleaning and transformation
+* **Power BI** – Data visualization and dashboards
+* **Python (Jupyter Notebook)** – Machine learning modeling
+* **Pandas & Scikit-learn** – Data preprocessing and model training
 
 ---
 
-# Future Improvements
+## Future Improvements
 
-Possible enhancements to the project:
+Potential improvements to extend this project include:
 
-* Deploy model using **Streamlit or Flask**
-* Automate pipeline with **ETL workflows**
-* Implement additional ML models:
-
-  * XGBoost
-  * Logistic Regression
-* Add **real-time churn prediction dashboards**
+* Deploying the model using **Streamlit or Flask**
+* Automating the data pipeline with **ETL workflows**
+* Testing additional machine learning models such as **XGBoost and Logistic Regression**
+* Creating **real-time churn prediction dashboards**
 
 ---
 
-# How to Run the Project
+## Conclusion
 
-### 1️⃣ SQL Server
+This project showcases a complete **data analytics and predictive modeling workflow**:
 
-* Import the dataset into SQL Server
-* Run the SQL cleaning scripts
-* Create views
+* Data preparation with SQL
+* Insight generation with Power BI
+* Predictive modeling with Python
 
-### 2️⃣ Power BI
-
-* Connect Power BI to SQL Server
-* Load cleaned tables and views
-* Open the `.pbix` dashboard file
-
-### 3️⃣ Python
-
-* Open the Jupyter Notebook
-* Install required libraries:
-
-```bash
-pip install pandas scikit-learn matplotlib seaborn
-```
-
-* Run the notebook to train the model and generate predictions.
-
----
-
-# Conclusion
-
-This project demonstrates a **complete data analytics workflow**:
-
-* Data Cleaning (SQL)
-* Business Intelligence (Power BI)
-* Predictive Analytics (Machine Learning)
-
-It shows how businesses can combine **data analysis and machine learning** to proactively reduce customer churn and improve customer retention.
-
----
-
+By combining these tools, businesses can better understand customer behavior and take **proactive steps to improve customer retention**.
